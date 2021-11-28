@@ -27,4 +27,4 @@ topqb <- starts %>% group_by(Team, Player) %>%
     group_by(Team) %>%
     slice(which.max(TotalStarts))
 
-topqb
+write.csv(topqb, "data/topqb.csv")
