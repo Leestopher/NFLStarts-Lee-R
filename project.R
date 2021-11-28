@@ -14,6 +14,7 @@ httpgd::hgd_browse()
 
 starts <- read.csv("data/Starts.csv")
 team <- read.csv("data/TeamStats.csv")
+topqbr <- read.csv("data/topqbr.csv")
 
 glimpse(starts)
 
@@ -23,8 +24,23 @@ abbr <- starts %>% group_by(Team) %>%
 view(abbr)
 
 topqb <- starts %>% group_by(Team, Player) %>%
-    count(Player, name="TotalStarts") %>%
+    count(Player, name = "TotalStarts") %>%
     group_by(Team) %>%
     slice(which.max(TotalStarts))
 
 write.csv(topqb, "data/topqb.csv")
+
+#Not much for this one, huh? Maybe a small + correlation, but not much.  Darn.
+topqbr %>% ggplot(aes(TotalStarts, QBR)) +
+    geom_point()
+
+teamqb <- merge(team, topqbr, by = "Team")
+
+glimpse(teamqb)
+
+teamqb <- teamqb %>% mutate(WL = W / (W+L))
+
+#A bit more correlation here.. 5 of the top 6 QB's have above .500
+teamqb %>% ggplot(aes(TotalStarts, WL)) +
+    geom_point() +
+    scale_y_log10()
