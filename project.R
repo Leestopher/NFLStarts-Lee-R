@@ -28,6 +28,12 @@ topqb <- starts %>% group_by(Team, Player) %>%
     group_by(Team) %>%
     slice(which.max(TotalStarts))
 
+TotalQbs <- starts %>%
+    group_by(Team) %>%
+    summarise(TotalQBs = n_distinct(Player))
+
+team <- merge(team, TotalQbs, by = "Team")
+
 write.csv(topqb, "data/topqb.csv")
 
 #Not much for this one, huh? Maybe a small + correlation, but not much.  Darn.
@@ -44,3 +50,25 @@ teamqb <- teamqb %>% mutate(WL = W / (W+L))
 teamqb %>% ggplot(aes(TotalStarts, WL)) +
     geom_point() +
     scale_y_log10()
+
+teamqb %>% ggplot(aes(TotalStarts, TD)) +
+    geom_point() +
+    scale_y_log10()
+
+teamqb %>% ggplot(aes(TotalStarts, PPG)) +
+    geom_point() +
+    scale_y_log10()
+
+teamqb %>% ggplot(aes(TotalStarts, OPP.PPG)) +
+    geom_point() +
+    scale_y_log10()
+
+teamqb %>% ggplot(aes(TotalQBs, TD)) +
+    geom_point() +
+    scale_y_log10()
+
+teamqb %>% ggplot(aes(QBR, TD)) +
+    geom_point()
+
+teamqb %>% ggplot(aes(QBR, WL)) +
+    geom_point()
