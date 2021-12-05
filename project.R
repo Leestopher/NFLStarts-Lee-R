@@ -63,6 +63,8 @@ teamqb %>% ggplot(aes(TotalStarts, OPP.PPG)) +
     geom_point() +
     scale_y_log10()
 
+#This one is also awesome.  
+#Showing that, the more QB's that play for a team, the less TD's they get.
 teamqb %>% ggplot(aes(TotalQBs, TD)) +
     geom_point() +
     scale_y_log10()
@@ -70,5 +72,7 @@ teamqb %>% ggplot(aes(TotalQBs, TD)) +
 teamqb %>% ggplot(aes(QBR, TD)) +
     geom_point()
 
+#I like this plot.  Probably one of our good ones.
 teamqb %>% ggplot(aes(QBR, WL)) +
-    geom_point()
+    geom_hline(yintercept=0.5, linetype="dashed", color = "red") +
+    geom_text(aes(label = Team), hjust = 0, vjust = 0, size = 3)
