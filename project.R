@@ -28,9 +28,26 @@ topqb <- starts %>% group_by(Team, Player) %>%
     group_by(Team) %>%
     slice(which.max(TotalStarts))
 
+view(topqb)
+
 TotalQbs <- starts %>%
     group_by(Team) %>%
     summarise(TotalQBs = n_distinct(Player))
+
+topqb %>% ggplot(aes(reorder(Team, -TotalStarts, sum), TotalStarts)) +
+    geom_col() +
+    theme_bw() +
+    labs(title = "Total Starts for Top QB by Team", x = "Team", y = "Total Starts")
+
+ggsave("documents/topQBstarts.png", plot = last_plot())
+
+TotalQbs %>% ggplot(aes(reorder(Team, -TotalQBs, sum), TotalQBs)) +
+    geom_col() +
+    theme_bw() +
+    labs(title = "Total QB's by Team", x = "Team", y = "Total QB's")
+
+ggsave("documents/totalqbs.png", plot = last_plot())
+
 
 team <- merge(team, TotalQbs, by = "Team")
 
@@ -67,7 +84,11 @@ teamqb %>% ggplot(aes(TotalStarts, OPP.PPG)) +
 #Showing that, the more QB's that play for a team, the less TD's they get.
 teamqb %>% ggplot(aes(TotalQBs, TD)) +
     geom_point() +
-    scale_y_log10()
+    scale_y_continuous() +
+    theme_bw() +
+    labs(title = "Total TD's by # of QB's per Team", x = "# of QB's", y = "Total TD's")
+
+ggsave("documents/tdsbyqbs.png", plot = last_plot())
 
 teamqb %>% ggplot(aes(QBR, TD)) +
     geom_point()
@@ -75,4 +96,8 @@ teamqb %>% ggplot(aes(QBR, TD)) +
 #I like this plot.  Probably one of our good ones.
 teamqb %>% ggplot(aes(QBR, WL)) +
     geom_hline(yintercept=0.5, linetype="dashed", color = "red") +
-    geom_text(aes(label = Team), hjust = 0, vjust = 0, size = 3)
+    geom_text(aes(label = Team), hjust = 0, vjust = 0, size = 3) +
+    theme_bw() +
+    labs(title = "Team Win / Loss by Top Quarterback QBR", x = "Quarterback QBR", y = "Win/Loss")
+
+ggsave("documents/qbrbywl.png", plot = last_plot())
