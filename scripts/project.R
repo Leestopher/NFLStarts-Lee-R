@@ -39,14 +39,14 @@ topqb %>% ggplot(aes(reorder(Team, -TotalStarts, sum), TotalStarts)) +
     theme_bw() +
     labs(title = "Total Starts for Top QB by Team", x = "Team", y = "Total Starts")
 
-ggsave("documents/topQBstarts.png", plot = last_plot())
+ggsave("documents/topQBstarts.png", plot = last_plot(), width = 15)
 
 TotalQbs %>% ggplot(aes(reorder(Team, -TotalQBs, sum), TotalQBs)) +
     geom_col() +
     theme_bw() +
     labs(title = "Total QB's by Team", x = "Team", y = "Total QB's")
 
-ggsave("documents/totalqbs.png", plot = last_plot())
+ggsave("documents/totalqbs.png", plot = last_plot(), width = 15)
 
 
 team <- merge(team, TotalQbs, by = "Team")
@@ -88,7 +88,7 @@ teamqb %>% ggplot(aes(TotalQBs, TD)) +
     theme_bw() +
     labs(title = "Total TD's by # of QB's per Team", x = "# of QB's", y = "Total TD's")
 
-ggsave("documents/tdsbyqbs.png", plot = last_plot())
+ggsave("documents/tdsbyqbs.png", plot = last_plot(), width = 15)
 
 teamqb %>% ggplot(aes(QBR, TD)) +
     geom_point()
@@ -100,4 +100,4 @@ teamqb %>% ggplot(aes(QBR, WL)) +
     theme_bw() +
     labs(title = "Team Win / Loss by Top Quarterback QBR", x = "Quarterback QBR", y = "Win/Loss")
 
-ggsave("documents/qbrbywl.png", plot = last_plot())
+ggsave("documents/qbrbywl.png", plot = last_plot(), width = 15)
