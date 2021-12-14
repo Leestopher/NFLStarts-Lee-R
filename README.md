@@ -1,56 +1,28 @@
-# Personal data projects
+## Project Purpose
 
-Use this template repo for your personal data projects. Would you please use the following format for your repository? Please name your repository in your personal space using the following naming structure `[title]-[lastname]-[languagesused]`.  You will then complete a pull request to move your personal data projects into our organization.
+Sports analysis is tough.  Without experience in data scraping, it's quite difficult to find data sets that have comprehensive numbers for multiple years.
 
-- __Project Purpose:__ Take one to two paragraphs to explain your goals.  Why did you use this data? What skills are you going to demonstrate? Did you do this work for a client? 
-- __Tools used:__ Provide an overview of the programming languages and packages you leveraged for this work.  You could provide links to the pertinent reading material that you leveraged to complete the job. Provide links to your final scripts stored in your repository.
-- __Results:__ This is your conclusion.  Explain why your work matters.  How could others use it?  What are your next steps? Show some key findings.
+Luckily, there is a [Workout Wednesday](http://www.workout-wednesday.com/2021-week-34-how-many-consecutive-starts/) challenge that asks users to plot consecutive quarterback starts for NFL teams since 2006.  Although I'm not interested in _consecutive_ starts, I am interested in quarterback numbers and team efficiency!
 
-## Folder structure
+That's where [Statmuse](https://www.statmuse.com/nfl/ask/tom-brady-career-qbr) comes into play.  For relatively basic stats, you can ask their website a question, and it will pop out multiple statistics related to it!  Now, the more specific question, the tougher time Statmuse has to comprehend, BUT with something like QBR, all I have to do is ask the same question for 32 quarterbacks.  Now for some interesting plots.
 
-```
-- readme.md
-- scripts
----- readme.md (short description of each script)
----- data_munge.R
----- data_munge.py
----- eda.R
----- model.py
-- data (less than 100 Mb)
----- readme.md (links to data larger than 100 Mb and data details.)
----- crimes.csv
----- visits.json
-- documents
----- readme.md (notes while doing your project)
----- mlmethod.pdf
----- api_guide.pdf
-```
+!["topqbstarts"](documents/topQBstarts.png)
 
-## Writing about data science
+With this first plot, we are looking at the total starts for the "most-start" QB for each team.  So, if you're familiar with the NFL, you can probably name the first 12 or so teams without a thought.  Brees, Rivers, Manning, Roethlisberger, etc.  When you get to the 15-20 range, that's where it gets tough.  These teams, especially Cleveland, have never been able to find a consistent quarterback to last more than 3 or 4 years.
 
-[Thusan's article on how writing about data science is not easy](https://towardsdatascience.com/lets-admit-it-writing-about-data-science-is-not-easy-37a376777d36) could be helpful as you document your project and skills.
+!["totalqbs"](documents/totalqbs.png)
 
-## Data sources
+Here is a similar plot, showing total number of different quarterbacks for each team.  So you'll see the _fantastic_ Cleveland Browns on the first plot having the least starts, and on the second plot having the MOST quarterbacks.  Makes sense.  Now, if you're not familiar with football, you might wonder if this even matters in the long run?  If a team play more quarterbacks, do they inherently have worse offense?
 
-You don't need to make these projects complicated. These projects are built to show your work using the skills you have developed during the course. I would make sure that these are presentable in your Github space. You want to demonstrate your creativity. You could use the following links to find a new data set. 
+!["tdsbyqbs"](documents/tdsbyqbs.png)
 
-- [FiveThirtyEight](https://github.com/fivethirtyeight/data)
-- [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
-- [WorkoutWednesday](http://www.workout-wednesday.com/)
-- [Kaggle](https://www.kaggle.com/datasets)
-- [data.world](https://data.world/search?context=community&entryTypeLabel=dataset&q=free+data&type=all)
+Well yes, yes they do.  There seems to be a clear correlation with number of quarterbacks played and number of total touchdowns by a team's offense.  Considering touchdowns are the primary point-producing play, this is pretty clear and cut. _That being said_, they have worse offense, but do they win less?  Maybe their defense can hold the fort and win with the worse offense!
 
-## Github pages
+!["qbrbywl"](documents/qbrbywl.png)
 
-It would help if you took the time to publish your repo for easier viewing of the files.  Please follow the directions at [Github pages](https://pages.github.com/) to build your pages footprint on the internet.
+Well, it seems that the [worse a team's top qb plays](https://en.wikipedia.org/wiki/Passer_rating), the worse their team's win/loss is.  Although it might seem more evenly spread, there is a noticeable jump in win/loss once a quarterback has above around 95 [QBR](https://en.wikipedia.org/wiki/Passer_rating).
 
-## Questions
+##Additional Conclusions
 
-### Is the expectation of our personal projects similar to that of the class projects we are completing?
+In general, as expected, it is clear that a team with a reliable, starting quarterback performs better than one without.  This can be seen in win/loss, total offensive output(touchdowns), and most likely other aspects like playoff/Super Bowl appearances if the data was provided or added.
 
-Yes & No. Here are a few points to highlight the comparison
-
-1. Three different data sets is the main criteria. Hopefully different challenges to your skills and the data can be in the same area for all three if you desire.
-2. You can choose the language. Please choose based on where you want employment.
-3. We don't get much into the story telling with our class projects.  But, I would hope you tell a story that includes some graphs and analysis.
-4. Think of these as sales pitches for future employment. Your personal projects should be in your own Github space.
